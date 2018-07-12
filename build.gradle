@@ -1,0 +1,21 @@
+apply plugin: 'eclipse'
+
+apply plugin: 'ear' 
+
+repositories {
+    mavenCentral() 
+}
+
+dependencies {
+    deploy project(path: ':ejb')
+    deploy project(path: ':war', configuration: 'archives')
+
+    earlib group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+ 	earlib project(path: ':ejb', configuration: 'compile')
+
+} 
+
+eclipse.wtp.facet {
+	facets = []
+	facet name: 'jst.ear', version: '6.0'
+} 
